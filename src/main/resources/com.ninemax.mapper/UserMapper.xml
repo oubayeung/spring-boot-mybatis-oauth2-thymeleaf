@@ -1,0 +1,28 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ninemax.mapper.UserMapper" >
+   <select id="findUserByLoginId" parameterType="java.lang.String" resultType="User">
+       SELECT
+			id,
+			login_id as loginId,
+			`password`,
+			name,
+			address,
+			enabled,
+			createTime,
+			updateTime,
+			role
+		FROM
+			`user`
+		WHERE
+			login_id = #{loginId}
+   </select>
+
+    <select id="findAuthorityByLoginId" parameterType="java.lang.String" resultType="Authority">
+        SELECT
+        authority
+        FROM
+        authority
+        WHERE
+        userId = #{loginId}
+    </select>
+</mapper>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>createTime</th>
+            <th>role</th>
+        </tr>
+        <tbody>
+            <tr>
+                <td th:text="${id}">123</td>
+                <td th:text="#{createTime}">张三</td>
+                <td th:text="${loginId}">北京市海淀区</td>
+                <td th:text="${role}">2016/08/26</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

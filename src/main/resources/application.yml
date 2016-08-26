@@ -1,0 +1,33 @@
+####################server port#####################
+server:
+  port: 9090
+
+##################datasource########################
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/oauth
+    username: root
+    password: root
+######################Views########################
+#  view:
+#      prefix: /WEB-INF/views/
+#      suffix: .html
+
+
+  thymeleaf:
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: gbk #thymeleaf start
+    content-type: text/html
+    cache: false  #开发时关闭缓存,不然没法看到实时页面
+#thymeleaf end
+#####################security######################
+security:
+  oauth2:
+    client:
+      client-id: foo
+      client-secret: bar
+      authorized-grant-types: password,refresh_token
+      scope: read,write
