@@ -8,15 +8,17 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>createTime</th>
+            <th>loginId</th>
             <th>role</th>
+            <th>createTime</th>
         </tr>
         <tbody>
             <tr>
                 <td th:text="${id}">123</td>
-                <td th:text="#{createTime}">张三</td>
-                <td th:text="${loginId}">北京市海淀区</td>
-                <td th:text="${role}">2016/08/26</td>
+                <td th:text="${username}">张三</td>
+                <td th:text="${loginId}">pual</td>
+                <td th:text="${role}">ROLE_ADMIN</td>
+                <td th:text="${createTime}">2016/08/26</td>
             </tr>
         </tbody>
     </table>

@@ -158,8 +158,10 @@ public class User implements UserDetails, Authentication {
 
     @Override
     public String getUsername() {
-        return loginId;
+        return name;
     }
+
+
 
     @Override
     public int hashCode() {

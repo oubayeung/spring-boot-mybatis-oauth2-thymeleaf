@@ -10,16 +10,12 @@ spring:
     username: root
     password: root
 ######################Views########################
-#  view:
-#      prefix: /WEB-INF/views/
-#      suffix: .html
-
-
+#thymeleaf start
   thymeleaf:
     mode: HTML5
     prefix: classpath:/templates/
     suffix: .html
-    encoding: gbk #thymeleaf start
+    encoding: gbk
     content-type: text/html
     cache: false  #开发时关闭缓存,不然没法看到实时页面
 #thymeleaf end

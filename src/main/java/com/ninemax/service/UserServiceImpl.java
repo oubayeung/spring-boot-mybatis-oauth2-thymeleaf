@@ -3,6 +3,7 @@ package com.ninemax.service;
 
 import com.ninemax.entity.Authority;
 import com.ninemax.entity.User;
+import com.ninemax.mapper.AuthorityMapper;
 import com.ninemax.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,9 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
+    @Resource
+    private AuthorityMapper authorityMapper;
+
     @Override
     public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
         User user = userMapper.findUserByLoginId(loginId);
@@ -32,10 +36,15 @@ public class UserServiceImpl implements UserService {
             logger.error(loginId + "记录为空!");
             throw new UsernameNotFoundException(loginId);
         }
-        Authority authority = userMapper.findAuthorityByLoginId(user.getId());
+        Authority authority = authorityMapper.findAuthorityByLoginId(user.getId());
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
         user.setAuthorities(authorities);
         return user;
+    }
+
+    @Override
+    public int deleteUserById(String userId) throws Exception{
+        return userMapper.deleteUser(userId);
     }
 }

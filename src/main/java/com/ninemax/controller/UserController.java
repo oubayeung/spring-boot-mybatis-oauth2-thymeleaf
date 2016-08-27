@@ -1,4 +1,4 @@
-package com.ninemax.comtroller;
+package com.ninemax.controller;
 
 import com.ninemax.entity.User;
 import com.ninemax.service.UserServiceImpl;
@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created by Pual on 2016/8/26.
@@ -23,13 +19,7 @@ public class UserController {
     @RequestMapping("/user")
     @ResponseBody
     public User getUserInfo() {
-        //String uuid = UUID.randomUUID().toString().replace("-", "");
-        //System.out.println(uuid);
         User user = (User) userService.loadUserByUsername("pual");
-
-        //SimpleDateFormat format = new SimpleDateFormat();
-        //System.out.print(format.format(user.getCreateTime()));
-        //user.setCreateTime();
         return user;
     }
 
@@ -37,13 +27,21 @@ public class UserController {
     public String index(Model model) {
         User user = (User) userService.loadUserByUsername("pual");
         model.addAttribute("id", user.getId());
-        model.addAttribute("createTime", user.getCreateTime());
+        model.addAttribute("username", user.getUsername());
         model.addAttribute("loginId", user.getLoginId());
         model.addAttribute("role", user.getRole());
+        model.addAttribute("createTime", user.getCreateTime());
 
         return "index";
     }
 
-
+    @RequestMapping("/delete")
+    public void delete() {
+        try {
+            userService.deleteUserById("f041e5a1e0c44c60ad65138177cc79fb");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

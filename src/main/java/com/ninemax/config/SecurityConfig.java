@@ -163,7 +163,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			public void configure(HttpSecurity http) throws Exception {
 				http
 					.authorizeRequests()
-					.antMatchers("/resources/**", "/user", "/index").permitAll()
+					.antMatchers("/resources/**", "/user", "/index", "/delete").permitAll()
 					.anyRequest().authenticated()// 静态资源不拦截
 					.and()
 					.csrf()
