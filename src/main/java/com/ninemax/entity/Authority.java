@@ -6,8 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
  * Created by Pual on 2016/8/26.
  */
 
-@SuppressWarnings("serial")
 public class Authority implements GrantedAuthority{
+
     private String userId;
     private String authority;
     public void setUserId(String userId) {

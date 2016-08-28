@@ -38,7 +38,7 @@ public class UserController {
     @RequestMapping("/delete")
     public void delete() {
         try {
-            userService.deleteUserById("f041e5a1e0c44c60ad65138177cc79fb");
+            userService.deleteUserById("f041e5a");
         } catch (Exception e) {
             e.printStackTrace();
         }
