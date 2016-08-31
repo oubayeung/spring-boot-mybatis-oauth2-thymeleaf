@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head_static(title)">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}"></title>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport"/>
+    <link rel="stylesheet" href="/assets/css/base.min.css" th:href="@{/assets/css/base.min.css}"/>
+    <link rel="stylesheet" href="/assets/css/project.min.css" th:href="@{/assets/css/project.min.css}"/>
+    <script type="application/javascript" src="/assets/js/jquery-1.12.4.min.js"
+            th:src="@{/assets/js/jquery-1.12.4.min.js}"></script>
+    <script type="application/javascript" src="/assets/js/base.min.js"
+            th:src="@{/assets/js/base.min.js}"></script>
+    <!--<script type="application/javascript" src="/assets/js/project.min.js"-->
+    <!--th:src="@{/assets/js/project.min.js}"></script>-->
+</head>
+<body>
+<header class="header header-transparent header-waterfall ui-header" th:fragment="nav_header">
+    <ul class="nav nav-list pull-left">
+        <li>
+            <a data-toggle="menu" href="#ui_menu">
+                <span class="icon icon-lg">menu</span>
+            </a>
+        </li>
+    </ul>
+    <a class="header-logo margin-left-no" th:href="@{/}">首页</a>
+    <ul class="nav nav-list pull-right">
+        <li class="dropdown margin-right">
+            <a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
+                <span class="access-hide">John Smith</span>
+                <span class="avatar avatar-sm">
+                    游客
+                </span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <!--<li>-->
+                <!--<a class="padding-right-lg waves-attach" href="javascript:void(0)"><span-->
+                <!--class="icon icon-lg margin-right">account_box</span>Profile Settings</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<a class="padding-right-lg waves-attach" href="javascript:void(0)"><span-->
+                <!--class="icon icon-lg margin-right">add_to_photos</span>Upload Photo</a>-->
+                <!--</li>-->
+                <li>
+                    <a class="padding-right-lg waves-attach" th:href="@{/login}"><span
+                            class="icon icon-lg margin-right">exit_to_app</span>登录</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</header>
+
+<nav aria-hidden="true" class="menu" id="ui_menu" tabindex="-1" th:fragment="nav_list">
+    <div class="menu-scroll">
+        <div class="menu-content">
+            <a class="menu-logo" th:href="@{/}">首页</a>
+            <ul class="nav">
+                <li>
+                    <a class="collapsed waves-attach" data-toggle="collapse" href="#ui_menu_components">一级菜单1</a>
+                    <ul class="menu-collapse collapse" id="ui_menu_components">
+                        <li>
+                            <a class="waves-attach" href="javascript:void(0)">二级菜单1</a>
+                        </li>
+                        <li>
+                            <a class="waves-attach" href="javascript:void(0)">二级菜单2</a>
+                        </li>
+                        <li>
+                            <a class="waves-attach" href="javascript:void(0)">二级菜单3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="collapsed waves-attach" data-toggle="collapse" href="#ui_menu_extras">一级菜单2</a>
+                    <ul class="menu-collapse collapse" id="ui_menu_extras">
+                        <li>
+                            <a class="waves-attach" href="javascript:void(0)">二级菜单1</a>
+                        </li>
+                        <li>
+                            <a class="waves-attach" href="javascript:void(0)">二级菜单2</a>
+                        </li>
+                        <li>
+                            <a class="waves-attach" href="javascript:void(0)">二级菜单3</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div aria-hidden="true" class="modal modal-va-middle fade" id="captcha-dialog" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-xs">
+        <div class="modal-content">
+            <div class="modal-heading">
+                <h3>验证码</h3>
+            </div>
+            <div class="modal-inner">
+                <form action="">
+                    <div class="form-group form-group-label">
+                        <div class="row">
+                            <div class="col-md-10 col-md-push-1">
+                                <img id="captcha-img" th:src="@{/getCaptcha}" alt="验证码"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-label">
+                        <div class="row">
+                            <div class="col-md-10 col-md-push-1">
+                                <label class="floating-label" for="captcha">验证码</label>
+                                <input class="form-control" id="captcha" type="text"
+                                       name="captcha" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p class="text-right">
+                    <a class="btn btn-flat btn-brand-accent waves-attach"
+                       data-dismiss="modal">取消</a><a
+                        class="btn btn-flat btn-brand-accent waves-attach" data-dismiss="modal">提交</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        $("#captcha-img").click(function () {
+            $(this).attr('src', $(this).attr('src') + '?' + new Date().getTime());
+        });
+    </script>
+</div>
+<div aria-hidden="true" class="modal modal-va-middle fade" id="login-dialog" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-xs">
+        <div class="modal-content">
+            <div class="modal-heading">
+                <h3>登录</h3>
+            </div>
+            <div class="modal-inner">
+                <form th:fragment="login-form" th:action="@{/login}" method="post">
+                    <input style="display:none" title="hidden"/>
+                    <div class="form-group form-group-label">
+                        <div class="row">
+                            <div class="col-md-10 col-md-push-1">
+                                <label class="floating-label" for="username">账号</label>
+                                <input class="form-control" id="username" type="text"
+                                       name="username" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-label">
+                        <div class="row">
+                            <div class="col-md-10 col-md-push-1">
+                                <label class="floating-label" for="password">密码</label>
+                                <input class="form-control" id="password" name="password"
+                                       type="password" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-10 col-md-push-1">
+                                <span id="submit_login"
+                                      class="btn btn-block btn-brand waves-attach waves-light">
+                                    立即登录
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-10 col-md-push-1">
+                                <a th:href="@{/register}" class="btn btn-flat btn-brand waves-attach">立即注册</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p class="text-right">
+                    <a class="btn btn-flat btn-brand-accent waves-attach"
+                       data-dismiss="modal">取消</a><a
+                        class="btn btn-flat btn-brand-accent waves-attach" data-dismiss="modal">提交</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        $("#captcha-img").click(function () {
+            $(this).attr('src', $(this).attr('src') + '?' + new Date().getTime());
+        });
+    </script>
+</div>
+<footer class="ui-footer" th:fragment="footer_copyright">
+    <div class="container">
+        <p>© 2016 Elysion</p>
+    </div>
+</footer>
+</body>
+</html>
