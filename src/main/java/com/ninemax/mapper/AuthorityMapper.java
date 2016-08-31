@@ -3,10 +3,16 @@ package com.ninemax.mapper;
 import com.ninemax.entity.Authority;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 /**
  * Created by Pual on 2016/8/27.
  */
 public interface AuthorityMapper {
+
+
+    @Select("<script>select * from authority</script>")
+    List<Authority> findAll();
 
     @Select("<script>" +
             "SELECT " +
@@ -18,7 +24,7 @@ public interface AuthorityMapper {
             "userId = #{userId}" +
             "</if>" +
             "</script>")
-    public Authority findAuthorityByLoginId(@Param("userId") String userId);
+    Authority findAuthorityByLoginId(@Param("userId") String userId);
 
     @Insert("<script>" +
             "INSERT INTO AUTHORITY" +
@@ -39,7 +45,7 @@ public interface AuthorityMapper {
             "</if>" +
             "</trim>" +
             "</script>")
-    public int insertAuthority(Authority authority);
+    int insertAuthority(Authority authority);
 
     @Update("<script>" +
             "UPDATE authority" +
@@ -56,7 +62,7 @@ public interface AuthorityMapper {
             "userId = #{userId}, " +
             "</if>" +
             "</script>")
-    public int updateAuthority(@Param("userId") String userId);
+    int updateAuthority(@Param("userId") String userId);
 
     @Delete("<script>" +
             "DELETE " +
@@ -67,5 +73,5 @@ public interface AuthorityMapper {
             "userId = #{userId}" +
             "</if>" +
             "</script>")
-    public int deleteAuthority(@Param("userId") String userId);
+    int deleteAuthority(@Param("userId") String userId);
 }

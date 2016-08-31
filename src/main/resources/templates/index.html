@@ -1,26 +1,23 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="imports :: head_static('首页')">
+    <link rel="stylesheet" href="/assets/css/base.min.css" th:href="@{/assets/css/base.min.css}"/>
+    <link rel="stylesheet" href="/assets/css/project.min.css" th:href="@{/assets/css/project.min.css}"/>
 </head>
-<body>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>loginId</th>
-            <th>role</th>
-            <th>createTime</th>
-        </tr>
-        <tbody>
-            <tr>
-                <td th:text="${id}">123</td>
-                <td th:text="${username}">张三</td>
-                <td th:text="${loginId}">pual</td>
-                <td th:text="${role}">ROLE_ADMIN</td>
-                <td th:text="${createTime}">2016/08/26</td>
-            </tr>
-        </tbody>
-    </table>
+<body class="page-brand">
+<header th:replace="imports :: nav_header"></header>
+<nav th:replace="imports :: nav_list"></nav>
+<main class="content">
+    <div class="content-header ui-content-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-push-3 col-sm-10 col-sm-push-1">
+                    <h1 class="content-heading">正在开发</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="imports :: footer_copyright"></footer>
 </body>
 </html>

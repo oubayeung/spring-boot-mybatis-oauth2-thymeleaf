@@ -12,18 +12,18 @@ import javax.annotation.Resource;
 /**
  * Created by Pual on 2016/8/26.
  */
-@Controller
+@Controller("/user")
 public class UserController {
     @Resource
     private UserServiceImpl userService;
-    @RequestMapping("/user")
+    @RequestMapping("/info")
     @ResponseBody
     public User getUserInfo() {
         User user = (User) userService.loadUserByUsername("pual");
         return user;
     }
 
-    @RequestMapping("/index")
+    @RequestMapping("/save")
     public String index(Model model) {
         User user = (User) userService.loadUserByUsername("pual");
         model.addAttribute("id", user.getId());

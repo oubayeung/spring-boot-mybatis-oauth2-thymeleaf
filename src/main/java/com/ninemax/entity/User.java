@@ -24,8 +24,10 @@ public class User implements UserDetails, Authentication {
     private String password;
     private String name;
 
+    private String address;
+
     @SuppressWarnings("unused")
-    private boolean enabled;
+    private boolean enabled = true;
     private Date createTime;
     private Date updateTime;
     private String role;
@@ -73,6 +75,14 @@ public class User implements UserDetails, Authentication {
     @Override
     public String getName() {
         return name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public Date getCreateTime() {

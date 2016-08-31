@@ -10,6 +10,8 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.util.List;
+
 /**
  * Created by Pual on 2016/8/28.
  */
@@ -45,12 +47,25 @@ public class AuthorityMapperTests {
 
 
     @Test
-    public void testdeleteAuthorityByLoginId() {
+    public void testDeleteAuthorityByLoginId() {
 
         int a = authorityMapper.deleteAuthority("f041e5a1e0c44c60ad65138177cc79fb");
 
         System.out.println("=========\n==========\n=========\n==========\n");
         System.out.println(a);
     }
+
+    @Test
+    public void testFindAll() {
+        List<Authority> authorities = authorityMapper.findAll();
+        if (authorities.size() != 0) {
+            for (Authority authority : authorities) {
+                System.out.println(authority);
+            }
+        } else {
+            System.err.println("查询记录为空");
+        }
+    }
+
 
 }

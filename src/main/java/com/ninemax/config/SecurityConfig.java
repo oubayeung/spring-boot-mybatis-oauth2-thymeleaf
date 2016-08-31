@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -64,7 +65,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}
-	
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+				.authorizeRequests()
+				.antMatchers("/resources/**").permitAll()
+				.antMatchers("/login").permitAll()
+				.antMatchers("/register").permitAll()
+				.antMatchers("/").permitAll()
+				.antMatchers("/home").permitAll()
+				.antMatchers("/index").permitAll();
+		http.httpBasic();
+	}
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/resources/**");
+	}
+
 	@Configuration
 	@EnableAuthorizationServer
 	protected static class Oauth2Config extends AuthorizationServerConfigurerAdapter {
@@ -93,6 +112,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 			security.checkTokenAccess("isAuthenticated()");
 		}
+
+
 
 		@Override
 		public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
@@ -155,7 +176,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			}
 			
 		}
-		
+
+
 		@Configuration
 		@EnableResourceServer
 		protected static class ResourceServer extends ResourceServerConfigurerAdapter {
@@ -163,7 +185,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			public void configure(HttpSecurity http) throws Exception {
 				http
 					.authorizeRequests()
-					.antMatchers("/resources/**", "/user", "/index", "/delete").permitAll()
+					.antMatchers("/resources/**", "/user/**", "/index", "/delete", "/", "/home").permitAll()
 					.anyRequest().authenticated()// 静态资源不拦截
 					.and()
 					.csrf()

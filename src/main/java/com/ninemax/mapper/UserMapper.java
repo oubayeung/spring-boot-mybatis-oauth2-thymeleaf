@@ -3,22 +3,27 @@ package com.ninemax.mapper;
 import com.ninemax.entity.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 /**
  * Created by Pual on 2016/8/26.
  */
 public interface UserMapper {
 
+    @Select("<script>select * from user</script>")
+    List<User> findAll();
+
     @Select("<script>" +
             "SELECT " +
-            "id, login_id as loginId, password, name, address, enabled, createTime, updateTime, role " +
+            "id, loginId as loginId, password, name, address, enabled, createTime, updateTime, role " +
             "FROM  " +
             "user " +
             "WHERE " +
             "<if test = \"loginId != null\">" +
-            "login_id = #{loginId}" +
+            "loginId = #{loginId}" +
             "</if>" +
             "</script>")
-    public User findUserByLoginId(@Param("loginId") String loginId);
+    User findUserByLoginId(@Param("loginId") String loginId);
 
     @Insert("<script>" +
             "INSERT INTO user " +
@@ -26,8 +31,8 @@ public interface UserMapper {
             "<if test=\"id != null\">" +
             "id," +
             "</if>" +
-            "<if test=\"login_id != null\">" +
-            "login_id," +
+            "<if test=\"loginId != null\">" +
+            "loginId," +
             "</if>" +
             "<if test=\"password != null\">" +
             "password," +
@@ -55,8 +60,8 @@ public interface UserMapper {
             "<if test =\"id != null\">" +
             "#{id}, " +
             "</if>" +
-            "<if test =\"login_id != null\" >" +
-            "#{login_id}, " +
+            "<if test =\"loginId != null\" >" +
+            "#{loginId}, " +
             "</if>" +
             "<if test=\"password != null\">" +
             "#{password}, " +
@@ -81,7 +86,7 @@ public interface UserMapper {
             "</if>" +
             "</trim>" +
             "</script>")
-    public int insertUser(User user);
+    int insertUser(User user);
 
     @Update("<script>" +
             "UPDATE user" +
@@ -89,8 +94,8 @@ public interface UserMapper {
             "<if test=\"id != null\">" +
             "id = #{id}, " +
             "</if>" +
-            "<if test=\"login_id != null\">" +
-            "login_id = #{login_id}, " +
+            "<if test=\"loginId != null\">" +
+            "loginId = #{loginId}, " +
             "</if>" +
             "<if test=\"password != null\">" +
             "password = #{password}, " +
@@ -119,7 +124,7 @@ public interface UserMapper {
             "id = #{id}" +
             "</if>" +
             "</script>")
-    public int updateUser(@Param("id") String id);
+    int updateUser(User user);
 
     @Delete("<script>" +
             "DELETE " +
@@ -130,5 +135,7 @@ public interface UserMapper {
             "id = #{id}" +
             "</if>" +
             "</script>")
-    public int deleteUser(@Param("id") String id);
+    int deleteUserById(@Param("id") String id);
+
+
 }
