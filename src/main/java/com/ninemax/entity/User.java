@@ -27,7 +27,7 @@ public class User implements UserDetails, Authentication {
     private String address;
 
     @SuppressWarnings("unused")
-    private boolean enabled = true;
+    private boolean enabled = false;
     private Date createTime;
     private Date updateTime;
     private String role;
